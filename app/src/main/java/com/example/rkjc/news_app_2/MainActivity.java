@@ -26,13 +26,16 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView mNewsApiSearchResultsJSON;
 
+    private RecyclerView mRecyclerView;
+    private NewsAdapter mNewsAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         //mNewsApiSearchResultsJSON = (TextView) findViewById(R.id.tv_newsapi_search_results_json);
-
+        mRecyclerView
     }
 
     private void makeNewsApiSearch(){
@@ -47,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
             ArrayList<NewsItem> news_api_Json_Data = null;
             try{
                 String news_api_search_results = NetworkUtils.getResponseFromHttpUrl(news_api_URL);
-                news_api_Json_Data = JsonUtils.parseNews(MainActivity.this, news_api_search_results);
+                news_api_Json_Data = JsonUtils.parseNews(news_api_search_results);
 
             }catch (IOException e){
                 e.printStackTrace();
@@ -59,9 +62,9 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(ArrayList<NewsItem> news_api_Json_Data){
             if (news_api_Json_Data != null){
                 //mNewsApiSearchResultsJSON.setText(news_api_search_results);
-                for (NewsItem news_story : news_api_Json_Data){
-                   mNewsApiSearchResultsJSON.append((news_story.getPublishedAt()) + "\n\n\n");
-                }
+                /*for (NewsItem news_story : news_api_Json_Data){
+                   mNewsApiSearchResultsJSON.append((news_story.getDescription()) + "\n\n\n");
+                }*/
             }
         }
     }

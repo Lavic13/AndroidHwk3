@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import com.example.rkjc.news_app_2.NewsItem;
 
 public class JsonUtils {
-    public static ArrayList<NewsItem> parseNews(Context context, String jsonResult){
+    public static ArrayList<NewsItem> parseNews(String jsonResult){
 
         ArrayList<NewsItem> newsItemList = new ArrayList<>();
 
@@ -26,7 +26,7 @@ public class JsonUtils {
                 curr_news.setTitle(item.getString("title"));
                 curr_news.setDescription(item.getString("description"));
                 curr_news.setUrl(item.getString("url"));
-                curr_news.setUrl(item.getString("urlToImage"));
+                curr_news.setUrlToImage(item.getString("urlToImage"));
                 curr_news.setPublishedAt(item.getString("publishedAt"));
 
                 newsItemList.add(curr_news);
