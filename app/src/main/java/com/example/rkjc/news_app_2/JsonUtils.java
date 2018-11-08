@@ -18,7 +18,7 @@ public class JsonUtils {
             for(int i = 0; i < items.length(); i++){
                 JSONObject item = items.getJSONObject(i);
                 NewsItem curr_news = new NewsItem();
-                
+
                 curr_news.setAuthor(item.getString("author"));
                 curr_news.setTitle(item.getString("title"));
                 curr_news.setDescription(item.getString("description"));
