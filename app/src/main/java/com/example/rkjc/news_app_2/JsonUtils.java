@@ -1,5 +1,6 @@
 package com.example.rkjc.news_app_2;
 
+import android.content.Context;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -9,8 +10,10 @@ import java.util.ArrayList;
 import com.example.rkjc.news_app_2.NewsItem;
 
 public class JsonUtils {
-    public static ArrayList<NewsItem> parseNews(String jsonResult){
+    public static ArrayList<NewsItem> parseNews(Context context, String jsonResult){
+
         ArrayList<NewsItem> newsItemList = new ArrayList<>();
+
         try{
             JSONObject mainJSONObject = new JSONObject(jsonResult);
             JSONArray items = mainJSONObject.getJSONArray("articles");
@@ -25,6 +28,8 @@ public class JsonUtils {
                 curr_news.setUrl(item.getString("url"));
                 curr_news.setUrl(item.getString("urlToImage"));
                 curr_news.setPublishedAt(item.getString("publishedAt"));
+
+                newsItemList.add(curr_news);
             }
 
         }catch(JSONException e) {

@@ -5,8 +5,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-<!--
-    <ScrollView
+
+    <!--<ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp">
@@ -16,7 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Make a search!"
-            android:textSize="18sp" /
+            android:textSize="18sp" />
     </ScrollView>-->
     <android.support.v7.widget.RecyclerView
         android:id="@+id/news_recyclerview"

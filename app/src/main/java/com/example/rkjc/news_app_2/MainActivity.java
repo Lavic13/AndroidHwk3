@@ -18,7 +18,8 @@ import android.widget.Toast;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-
+import com.example.rkjc.news_app_2.NewsItem;
+import com.example.rkjc.news_app_2.NetworkUtils;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -30,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mNewsApiSearchResultsJSON = (TextView) findViewById(R.id.tv_newsapi_search_results_json);
+        //mNewsApiSearchResultsJSON = (TextView) findViewById(R.id.tv_newsapi_search_results_json);
 
     }
 
@@ -39,23 +40,28 @@ public class MainActivity extends AppCompatActivity {
         new NewsQueryTask().execute(news_api_search);
     }
 
-    public class NewsQueryTask extends AsyncTask<URL, Void, String> {
+    public class NewsQueryTask extends AsyncTask<URL, Void, ArrayList<NewsItem>> {
         @Override
-        protected String doInBackground(URL... params){
+        protected ArrayList<NewsItem> doInBackground(URL... params){
             URL news_api_URL = params[0];
-            String news_api_search_results = null;
+            ArrayList<NewsItem> news_api_Json_Data = null;
             try{
-                news_api_search_results = NetworkUtils.getResponseFromHttpUrl(news_api_URL);
+                String news_api_search_results = NetworkUtils.getResponseFromHttpUrl(news_api_URL);
+                news_api_Json_Data = JsonUtils.parseNews(MainActivity.this, news_api_search_results);
+
             }catch (IOException e){
                 e.printStackTrace();
             }
-            return news_api_search_results;
+            return news_api_Json_Data;
         }
 
         @Override
-        protected void onPostExecute(String news_api_search_results){
-            if (news_api_search_results != null && !news_api_search_results.equals("")){
-                mNewsApiSearchResultsJSON.setText(news_api_search_results);
+        protected void onPostExecute(ArrayList<NewsItem> news_api_Json_Data){
+            if (news_api_Json_Data != null){
+                //mNewsApiSearchResultsJSON.setText(news_api_search_results);
+                for (NewsItem news_story : news_api_Json_Data){
+                   mNewsApiSearchResultsJSON.append((news_story.getPublishedAt()) + "\n\n\n");
+                }
             }
         }
     }
