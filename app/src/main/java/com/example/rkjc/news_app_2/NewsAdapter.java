@@ -17,7 +17,7 @@ import  com.example.rkjc.news_app_2.NewsItem;
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsItemViewHolder> {
     Context mContext;
-    private ArrayList<NewsItem> mNews;
+    ArrayList<NewsItem> mNews;
 
     public  NewsAdapter(Context context, ArrayList<NewsItem> news){
         this.mContext = context;
@@ -43,6 +43,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsItemViewHo
 
     @Override
     public int getItemCount() {
+        if(null == mNews) return 0;
         return mNews.size();
     }
 
