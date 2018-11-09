@@ -1,6 +1,8 @@
 package com.example.rkjc.news_app_2;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,7 +24,7 @@ import com.example.rkjc.news_app_2.NewsItem;
 import com.example.rkjc.news_app_2.NetworkUtils;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NewsAdapter.ListItemClickListener{
 
     private TextView mNewsApiSearchResultsJSON;
 
@@ -40,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setHasFixedSize(true);
-        mNewsAdapter = new NewsAdapter(this, api_news);
+        mNewsAdapter = new NewsAdapter(this, api_news, this);
         mRecyclerView.setAdapter(mNewsAdapter);
 
     }
@@ -93,6 +95,19 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onListItemClick(String url){
+        //Context context = this;
+        //Toast.makeText(context, url, Toast.LENGTH_SHORT).show();
+        Uri web_page = Uri.parse(url);
+
+        Intent intent = new Intent(Intent.ACTION_VIEW, web_page);
+        if (intent.resolveActivity(getPackageManager()) != null){
+            startActivity(intent);
+        }
+
     }
 
 }

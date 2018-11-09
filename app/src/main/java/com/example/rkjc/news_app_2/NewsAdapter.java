@@ -18,10 +18,16 @@ import  com.example.rkjc.news_app_2.NewsItem;
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsItemViewHolder> {
     Context mContext;
     ArrayList<NewsItem> mNews;
+    final private ListItemClickListener mOnClickListener;
 
-    public  NewsAdapter(Context context, ArrayList<NewsItem> news){
+    public interface ListItemClickListener{
+      void onListItemClick(String url);
+    }
+
+    public NewsAdapter(Context context, ArrayList<NewsItem> news, ListItemClickListener listener){
         this.mContext = context;
         this.mNews = news;
+        this.mOnClickListener = listener;
     }
 
     @Override
@@ -47,22 +53,30 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsItemViewHo
         return mNews.size();
     }
 
-    public class NewsItemViewHolder extends RecyclerView.ViewHolder{
+    public class NewsItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView date;
         TextView title;
         TextView description;
 
         public NewsItemViewHolder(View itemView){
             super(itemView);
-            date = (TextView) itemView.findViewById(R.id.news_date);
-            title = (TextView) itemView.findViewById(R.id.news_title);
-            description = (TextView) itemView.findViewById(R.id.news_description);
+            date = itemView.findViewById(R.id.news_date);
+            title = itemView.findViewById(R.id.news_title);
+            description = itemView.findViewById(R.id.news_description);
+            itemView.setOnClickListener(this);
         }
 
         void bind(final int listIndex){
-            date.setText(mNews.get(listIndex).getPublishedAt());
-            title.setText((mNews.get(listIndex).getTitle()));
-            description.setText(mNews.get(listIndex).getDescription());
+            date.setText("Date: " + mNews.get(listIndex).getPublishedAt());
+            title.setText(("Title: "+ mNews.get(listIndex).getTitle()));
+            description.setText("Description: " + mNews.get(listIndex).getDescription());
+        }
+
+        @Override
+        public void onClick(View v){
+            int adapterPosition = getAdapterPosition();
+            String url_to_web_page = mNews.get(adapterPosition).getUrl();
+            mOnClickListener.onListItemClick(url_to_web_page);
         }
     }
 
