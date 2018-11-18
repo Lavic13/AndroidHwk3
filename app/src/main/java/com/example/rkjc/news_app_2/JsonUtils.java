@@ -1,13 +1,10 @@
 package com.example.rkjc.news_app_2;
 
-import android.content.Context;
-import android.util.Log;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
-import com.example.rkjc.news_app_2.NewsItem;
+import com.example.rkjc.news_app_2.Database.NewsItem;
 
 public class JsonUtils {
     public static ArrayList<NewsItem> parseNews(String jsonResult){
