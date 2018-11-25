@@ -1,8 +1,11 @@
 package com.example.rkjc.news_app_2;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,12 +17,15 @@ import android.widget.TextView;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
+
 import com.example.rkjc.news_app_2.Database.NewsItem;
 
 
 public class MainActivity extends AppCompatActivity implements NewsAdapter.ListItemClickListener{
 
-    private TextView mNewsApiSearchResultsJSON;
+    //private TextView mNewsApiSearchResultsJSON;
+    private NewsItemViewModel newsItemViewModel;
 
     private RecyclerView mRecyclerView;
     private NewsAdapter mNewsAdapter;
@@ -29,6 +35,14 @@ public class MainActivity extends AppCompatActivity implements NewsAdapter.ListI
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        newsItemViewModel = ViewModelProviders.of(this).get(NewsItemViewModel.class);
+        newsItemViewModel.getAllnewsItems().observe(this, new Observer<List<NewsItem>>() {
+            @Override
+            public void onChanged(@Nullable List<NewsItem> items) {
+    
+            }
+        });
 
       //  mNewsApiSearchResultsJSON = (TextView) findViewById(R.id.tv_newsapi_search_results_json);
         mRecyclerView = (RecyclerView) findViewById(R.id.news_recyclerview);
@@ -84,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements NewsAdapter.ListI
     public boolean onOptionsItemSelected(MenuItem item){
         int clicked_item = item.getItemId();
         if(clicked_item == R.id.action_search){
-            makeNewsApiSearch();
+            //makeNewsApiSearch();
             return true;
         }
         return super.onOptionsItemSelected(item);
