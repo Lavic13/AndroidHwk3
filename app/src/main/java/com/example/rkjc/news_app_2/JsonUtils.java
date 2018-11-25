@@ -17,14 +17,15 @@ public class JsonUtils {
 
             for(int i = 0; i < items.length(); i++){
                 JSONObject item = items.getJSONObject(i);
-                NewsItem curr_news = new NewsItem();
+                NewsItem curr_news = new NewsItem(item.getString("author"), item.getString("title"), item.getString("description"),
+                        item.getString("url"),item.getString("urlToImage"), item.getString("publishedAt"));
 
-                curr_news.setAuthor(item.getString("author"));
+                /*curr_news.setAuthor(item.getString("author"));
                 curr_news.setTitle(item.getString("title"));
                 curr_news.setDescription(item.getString("description"));
                 curr_news.setUrl(item.getString("url"));
                 curr_news.setUrlToImage(item.getString("urlToImage"));
-                curr_news.setPublishedAt(item.getString("publishedAt"));
+                curr_news.setPublishedAt(item.getString("publishedAt"));*/
 
                 newsItemList.add(curr_news);
             }

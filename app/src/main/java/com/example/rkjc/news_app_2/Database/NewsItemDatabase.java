@@ -11,7 +11,7 @@ public abstract class NewsItemDatabase extends RoomDatabase {
 
     public abstract NewsItemDao newsItemDao();
 
-    public  static  synchronized  NewsItemDatabase getInstance(Context context){
+    public  static  synchronized  NewsItemDatabase getInstance(final Context context){
         if(instance == null){
             instance = Room.databaseBuilder(context.getApplicationContext(), NewsItemDatabase.class, "newsItem_database")
                     .fallbackToDestructiveMigration()

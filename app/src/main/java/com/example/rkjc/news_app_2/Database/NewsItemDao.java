@@ -20,7 +20,7 @@ public interface NewsItemDao {
     void clearAll();
 
     @Insert
-    void insert(List<NewsItem> items);
+    void insert(NewsItem items);
 
 
 }
