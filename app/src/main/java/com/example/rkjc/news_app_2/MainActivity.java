@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity implements NewsAdapter.ListI
 
     }
 
-    private void makeNewsApiSearch(){
+    /*private void makeNewsApiSearch(){
         URL news_api_search = NetworkUtils.buildURL();
         new NewsQueryTask().execute(news_api_search);
     }
@@ -69,10 +69,10 @@ public class MainActivity extends AppCompatActivity implements NewsAdapter.ListI
                 //mNewsApiSearchResultsJSON.setText(news_api_search_results);
                /* for (NewsItem news_story : news_api_Json_Data){
           //         mNewsApiSearchResultsJSON.append((news_story.getDescription()) + "\n\n\n");
-                }*/
+                }
             }
         }
-    }
+    }*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu){

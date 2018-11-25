@@ -35,7 +35,7 @@ public class NewsItemRepository {
 
     }
 
-    public LiveData<List<NewsItem>> loadAllTassk(){
+    public LiveData<List<NewsItem>> loadAllTask(){
 
         return allNewsItem;
     }
