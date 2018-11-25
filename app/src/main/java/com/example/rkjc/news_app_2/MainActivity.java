@@ -13,6 +13,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.net.URL;
@@ -36,21 +37,31 @@ public class MainActivity extends AppCompatActivity implements NewsAdapter.ListI
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        newsItemViewModel = ViewModelProviders.of(this).get(NewsItemViewModel.class);
-        newsItemViewModel.getAllnewsItems().observe(this, new Observer<List<NewsItem>>() {
-            @Override
-            public void onChanged(@Nullable List<NewsItem> items) {
-    
-            }
-        });
-
-      //  mNewsApiSearchResultsJSON = (TextView) findViewById(R.id.tv_newsapi_search_results_json);
         mRecyclerView = (RecyclerView) findViewById(R.id.news_recyclerview);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setHasFixedSize(true);
         mNewsAdapter = new NewsAdapter(this, api_news, this);
         mRecyclerView.setAdapter(mNewsAdapter);
+
+        newsItemViewModel = ViewModelProviders.of(this).get(NewsItemViewModel.class);
+        newsItemViewModel.getAllnewsItems().observe(this, new Observer<List<NewsItem>>() {
+            @Override
+            public void onChanged(@Nullable List<NewsItem> items) {
+                //Toast.makeText(MainActivity.this, "onChanged", Toast.LENGTH
+                // _SHORT).show();
+                mNewsAdapter.mNews.addAll(items);
+                mNewsAdapter.notifyDataSetChanged();
+            }
+        });
+
+      //  mNewsApiSearchResultsJSON = (TextView) findViewById(R.id.tv_newsapi_search_results_json);
+        /*mRecyclerView = (RecyclerView) findViewById(R.id.news_recyclerview);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        mRecyclerView.setLayoutManager(layoutManager);
+        mRecyclerView.setHasFixedSize(true);
+        mNewsAdapter = new NewsAdapter(this, api_news, this);
+        mRecyclerView.setAdapter(mNewsAdapter);*/
 
     }
 
@@ -99,6 +110,7 @@ public class MainActivity extends AppCompatActivity implements NewsAdapter.ListI
         int clicked_item = item.getItemId();
         if(clicked_item == R.id.action_search){
             //makeNewsApiSearch();
+            newsItemViewModel.Api_Db_Sync();
             return true;
         }
         return super.onOptionsItemSelected(item);

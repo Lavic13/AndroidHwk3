@@ -8,11 +8,13 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import com.example.rkjc.news_app_2.Database.NewsItem;
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsItemViewHolder> {
     Context mContext;
-    ArrayList<NewsItem> mNews;
+    List<NewsItem> mNews;
     final private ListItemClickListener mOnClickListener;
 
     public interface ListItemClickListener{
@@ -39,6 +41,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsItemViewHo
 
     @Override
     public void onBindViewHolder(NewsItemViewHolder holder, int position) {
+
         holder.bind(position);
     }
 

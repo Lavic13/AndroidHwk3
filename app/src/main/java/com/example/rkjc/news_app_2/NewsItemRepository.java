@@ -21,7 +21,8 @@ public class NewsItemRepository {
     public NewsItemRepository(Application application){
         NewsItemDatabase database = NewsItemDatabase.getInstance(application);
         newsItemDao = database.newsItemDao();
-        new loadAllTaskAsynchTask(newsItemDao).execute(allNewsItem);
+        //new loadAllTaskAsynchTask(newsItemDao, allNewsItem).execute();
+        allNewsItem = newsItemDao.loadAlltasks();
 
 
     }
@@ -59,16 +60,18 @@ public class NewsItemRepository {
     }
 
 
-    public static class loadAllTaskAsynchTask extends AsyncTask<LiveData<List<NewsItem>>, Void, Void> {
+    public static class loadAllTaskAsynchTask extends AsyncTask<Void, Void, Void> {
         private NewsItemDao newsItemDao;
+        private LiveData<List<NewsItem>> newsItem;
 
-        private loadAllTaskAsynchTask(NewsItemDao newsItemDao) {
-            this.newsItemDao = this.newsItemDao;
+        private loadAllTaskAsynchTask(NewsItemDao newsItemDao, LiveData<List<NewsItem>> newsItem) {
+            this.newsItemDao = newsItemDao;
+            this.newsItem = newsItem;
         }
 
         @Override
-        protected Void doInBackground(LiveData<List<NewsItem>>... NewsItems) {
-            NewsItems[0] = newsItemDao.loadAlltasks();
+        protected Void doInBackground(Void...voids ) {
+            newsItem = newsItemDao.loadAlltasks();
             return null;
         }
     }
