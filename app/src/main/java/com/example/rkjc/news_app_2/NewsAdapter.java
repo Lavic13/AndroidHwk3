@@ -5,12 +5,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.example.rkjc.news_app_2.Database.NewsItem;
+import com.squareup.picasso.Picasso;
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsItemViewHolder> {
     Context mContext;
@@ -52,17 +54,17 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsItemViewHo
     }
 
     public class NewsItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        TextView date;
+        //TextView date;
         TextView title;
         TextView description;
-        TextView thumburl;
+        ImageView img;
 
         public NewsItemViewHolder(View itemView){
             super(itemView);
             //date = itemView.findViewById(R.id.news_date);
-            title = itemView.findViewById(R.id.news_title);
-            description = itemView.findViewById(R.id.news_description);
-            thumburl = itemView.findViewById(R.id.news_thumb_url);
+            title = (TextView) itemView.findViewById(R.id.news_title);
+            description = (TextView) itemView.findViewById(R.id.news_description);
+            img = (ImageView) itemView.findViewById(R.id.news_thumb_url);
             itemView.setOnClickListener(this);
         }
 
@@ -70,7 +72,13 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsItemViewHo
             //date.setText("Date: " + mNews.get(listIndex).getPublishedAt());
             title.setText(("Title: "+ mNews.get(listIndex).getTitle()));
             description.setText(mNews.get(listIndex).getPublishedAt() +". " + "Description: " + mNews.get(listIndex).getDescription());
-            thumburl.setText("PICTURE GOES HERE:" + mNews.get(listIndex).getUrlToImage());
+            //thumburl.setText("PICTURE GOES THERE:" + mNews.get(listIndex).getUrlToImage());
+            String thumb_url = mNews.get(listIndex).getUrlToImage();
+            if (thumb_url != null);{
+                Picasso.get()
+                        .load(thumb_url)
+                        .into(img);
+            }
         }
 
         @Override
