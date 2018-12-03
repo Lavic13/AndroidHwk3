@@ -48,4 +48,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
         exclude module: 'recyclerview-v7'
     }
+
+    implementation 'com.firebase:firebase-jobdispatcher:0.7.0'
+    implementation 'com.squareup.picasso:picasso:2.71828'
 }

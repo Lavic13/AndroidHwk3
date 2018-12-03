@@ -55,19 +55,22 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsItemViewHo
         TextView date;
         TextView title;
         TextView description;
+        TextView thumburl;
 
         public NewsItemViewHolder(View itemView){
             super(itemView);
-            date = itemView.findViewById(R.id.news_date);
+            //date = itemView.findViewById(R.id.news_date);
             title = itemView.findViewById(R.id.news_title);
             description = itemView.findViewById(R.id.news_description);
+            thumburl = itemView.findViewById(R.id.news_thumb_url);
             itemView.setOnClickListener(this);
         }
 
         void bind(final int listIndex){
-            date.setText("Date: " + mNews.get(listIndex).getPublishedAt());
+            //date.setText("Date: " + mNews.get(listIndex).getPublishedAt());
             title.setText(("Title: "+ mNews.get(listIndex).getTitle()));
-            description.setText("Description: " + mNews.get(listIndex).getDescription());
+            description.setText(mNews.get(listIndex).getPublishedAt() +". " + "Description: " + mNews.get(listIndex).getDescription());
+            thumburl.setText("PICTURE GOES HERE:" + mNews.get(listIndex).getUrlToImage());
         }
 
         @Override

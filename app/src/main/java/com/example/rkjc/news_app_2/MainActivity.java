@@ -12,6 +12,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -55,13 +56,19 @@ public class MainActivity extends AppCompatActivity implements NewsAdapter.ListI
             }
         });
 
-      //  mNewsApiSearchResultsJSON = (TextView) findViewById(R.id.tv_newsapi_search_results_json);
-        /*mRecyclerView = (RecyclerView) findViewById(R.id.news_recyclerview);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        mRecyclerView.setLayoutManager(layoutManager);
-        mRecyclerView.setHasFixedSize(true);
-        mNewsAdapter = new NewsAdapter(this, api_news, this);
-        mRecyclerView.setAdapter(mNewsAdapter);*/
+        //NewsUtils.updateNewsReminder(this);
+        //NewsUtils.updateNewsReminder(this);
+
+
+
+
+        //  mNewsApiSearchResultsJSON = (TextView) findViewById(R.id.tv_newsapi_search_results_json);
+       // mRecyclerView = (RecyclerView) findViewById(R.id.news_recyclerview);
+        //LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        //mRecyclerView.setLayoutManager(layoutManager);
+        //mRecyclerView.setHasFixedSize(true);
+        //mNewsAdapter = new NewsAdapter(this, api_news, this);
+        //mRecyclerView.setAdapter(mNewsAdapter);
 
     }
 
@@ -99,6 +106,7 @@ public class MainActivity extends AppCompatActivity implements NewsAdapter.ListI
         }
     }*/
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.main_menu, menu);
@@ -129,4 +137,7 @@ public class MainActivity extends AppCompatActivity implements NewsAdapter.ListI
 
     }
 
+    /*public void testNotification(View view) {
+        NotificationUtils.remindUserEveryTenSeconds(this);
+    }*/
 }
